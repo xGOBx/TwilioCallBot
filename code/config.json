@@ -2,5 +2,6 @@
     "account_sid": "",
     "auth_token": "",
     "phone_number": "",
+    "elevenlabs_api_key": "",
     "webhook_url": ""
 }
