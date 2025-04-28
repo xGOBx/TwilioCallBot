@@ -9,6 +9,7 @@ class ElevenLabsTTS:
     def __init__(self,audio_dir):
         self.client = None
         self.voice_id = "21m00Tcm4TlvDq8ikWAM"  # Default voice (Rachel)
+        self.voice_name = "Rachel"  # Track voice name too
         self.model = "eleven_multilingual_v2"
         self.available_voices = []
         self.is_initialized = False
@@ -28,7 +29,15 @@ class ElevenLabsTTS:
         try:
             response = self.client.voices.get_all()
             self.available_voices = response.voices
+            
+            # Also set the default voice name if possible
+            for voice in self.available_voices:
+                if voice.voice_id == self.voice_id:
+                    self.voice_name = voice.name
+                    break
+                    
             logging.info(f"Cached {len(self.available_voices)} voices from ElevenLabs")
+            logging.info(f"Current voice: {self.voice_name} (ID: {self.voice_id})")
         except Exception as e:
             logging.error(f"Error fetching voices: {e}")
             self.available_voices = []
@@ -48,7 +57,8 @@ class ElevenLabsTTS:
                 # Just use the path directly without joining it with audio_dir again
                 # This fixes the audio_files/audio_files nesting issue
                 output_file = output_file
-                
+            logging.info(f"Generating speech with voice: {self.voice_name} (ID: {self.voice_id})")
+ 
             audio = self.client.generate(
                 text=text,
                 voice=Voice(
@@ -111,27 +121,19 @@ class ElevenLabsTTS:
         self.check_api_key()
         return [(voice.name, voice.voice_id) for voice in self.available_voices]
 
-    def set_voice(self, voice_id):
-        self.voice_id = voice_id
-
-    def preview_voice(self, text):
-        self.check_api_key()
-        try:
-            audio = self.client.generate(
-                text=text,
-                voice=Voice(
-                    voice_id=self.voice_id,
-                    settings=VoiceSettings(
-                        stability=0.71,
-                        similarity_boost=0.5,
-                        style=0.0,
-                        use_speaker_boost=True
-                    )
-                ),
-                model=self.model
-            )
-            play(audio)
+    def set_voice(self, voice_id, voice_name=None):
+            """Set the voice to use for speech generation"""
+            old_voice_id = self.voice_id
+            self.voice_id = voice_id
+            
+            # Set voice name if provided, otherwise find it from available voices
+            if voice_name:
+                self.voice_name = voice_name
+            else:
+                for voice in self.available_voices:
+                    if voice.voice_id == voice_id:
+                        self.voice_name = voice.name
+                        break
+            
+            logging.info(f"Voice changed from {old_voice_id} to {self.voice_id} ({self.voice_name})")
             return True
-        except Exception as e:
-            logging.error(f"Preview error: {e}")
-            return False
