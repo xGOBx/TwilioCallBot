@@ -1,5 +1,5 @@
 import json
-from constants import CONFIG_FILE
+CONFIG_FILE = 'config.json'
 
 
 def get_webhook_url():

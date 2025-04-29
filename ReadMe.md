@@ -55,13 +55,15 @@ ngrok is a tunneling service that makes your local server accessible to the inte
 
 1. Open the `config.json` file and update it with your credentials:
    ```json
-    {
-        "account_sid": "",
-        "auth_token": "",
-        "phone_number": "",
-        "elevenlabs_api_key": "",
-        "webhook_url": ""
-    }
+   {
+      "account_sid": "",
+      "auth_token": "",
+      "phone_number": "",
+      "elevenlabs_api_key": "",
+      "webhook_url": "",
+      "voice_id": "",
+      "voice_name": ""
+   }
    ```
 ## Running the Application
 
@@ -69,7 +71,7 @@ ngrok is a tunneling service that makes your local server accessible to the inte
 The application automatically:
 - Starts the Flask server
 - Launches and manages ngrok
-- Updates the config.json file with the current ngrok URL
+- Updates the config.json file witha the current ngrok URL
 - Updates your Twilio webhook configuration
 
 Your TwilioCallBot is now ready to receive and make calls!
@@ -85,3 +87,7 @@ Your TwilioCallBot is now ready to receive and make calls!
 - Verify your ElevenLabs API key has sufficient credits
 - Ensure your `config.json` file has the correct credentials
 - Check that your Flask app is running without errors
+
+![TwilioCallBot main GUI](ReadMeImages/CallBot.PNG)
+
+![TwilioCallBot Voice Selection GUI](ReadMeImages/Voices.PNG)

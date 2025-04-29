@@ -1,5 +1,4 @@
 # constants.py
-CONFIG_FILE = 'config.json'
 
 import ConfigHelper
 
@@ -11,6 +10,7 @@ AUDIO_DIR = 'audio_files'
 SUCCESS_FILE = 'success.txt'
 RETRY_FILE = 'retries.txt'
 NUMBER_REGEX = r'[^0-9]'
+CONFIG_FILE = ConfigHelper.CONFIG_FILE
 
 # Initialize constants with values from config
 TWILIO_ACCOUNT_SID = ConfigHelper.get_twilio_account_sid()

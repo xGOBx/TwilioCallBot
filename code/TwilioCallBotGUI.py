@@ -19,7 +19,7 @@ class TwilioCallBotGUI:
     def __init__(self, master):
         self.master = master
         self.master.title("Twilio Call Bot with ElevenLabs TTS")
-        self.master.geometry("700x700")
+        self.master.geometry("800x700")
         self.master.configure(bg="#f5f5f5")
         self.master.resizable(True, True)
         
@@ -49,7 +49,17 @@ class TwilioCallBotGUI:
         self.setup_ngrok()
         self.setup_gui()
         self.load_config()
-    
+
+            
+        self.creator_label = tk.Label(
+                self.master,
+                text="Made by @xGOBx",
+                font=self.small_font,
+                bg=self.bg_color,
+                fg=self.primary_color
+            )
+        self.creator_label.place(relx=0.98, rely=0.98, anchor="se")
+            
     def ensure_config_file(self):
         """
         Ensures the configuration file exists and contains valid data.
