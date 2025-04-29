@@ -88,6 +88,6 @@ Your TwilioCallBot is now ready to receive and make calls!
 - Ensure your `config.json` file has the correct credentials
 - Check that your Flask app is running without errors
 
-![TwilioCallBot main GUI](ReadMeImages/CallBot.PNG)
+![TwilioCallBot main GUI](./ReadmeImages/CallBot.PNG)
 
-![TwilioCallBot Voice Selection GUI](ReadMeImages/Voices.PNG)
+![TwilioCallBot Voice Selection GUI](./ReadmeImages/Voices.PNG)
